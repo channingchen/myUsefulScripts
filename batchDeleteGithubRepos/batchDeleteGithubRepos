@@ -1,0 +1,14 @@
+#!/bin/bash
+echo "Enter the github api token(which should has delete_repo access):"
+read token
+echo "Enter the file name in current directory contains repos to be deleted in lines: "
+read filename
+while read line
+do
+	if [[ $line == \#* ]];
+	then
+		continue
+	fi
+	echo 'deleting repo '$line
+	curl -XDELETE -H 'Authorization: token $token' "https://api.github.com/repos/$line"
+done < $filename
