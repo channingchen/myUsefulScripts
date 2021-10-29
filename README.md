@@ -1,13 +1,11 @@
 # myUsefulScripts
 
-Here's my useful scripts!
+* Here's my useful scripts!
+* Tested only on macOS.
+* Help yourself.
 
-这里是我经常用的脚本！
+--- 
 
-Tested only on macOS.
-
-仅在macOS上测试过。
-
-Help yourself.
-
-随意取用。
+* 这里是我经常用的脚本！
+* 仅在macOS上测试过。
+* 随意取用。
