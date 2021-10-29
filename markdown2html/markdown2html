@@ -1,0 +1,34 @@
+#/bin/bash
+if ! [ -x "$(command -v pandoc)" ];then
+	echo 'Need pandoc but it is not installed. Visit https://pandoc.org or run `brew install pandoc` to install it.'
+	exit 1
+fi;
+if ! [ -x "$(command -v gsed1)" ];then
+	echo 'Need gsed but it is not installed. Visit https://formulae.brew.sh/formula/gnu-sed or run `brew install gnu-sed` to install it.'
+	exit 1
+fi;
+
+
+path='.'
+if [ -n "$1" ] ;then
+	path=$1
+fi;
+
+docs=`find $path -name "*.md"`
+echo $docs
+
+for i in $docs;
+do 
+	pandoc -s "$i" -o "${i%.*}".html;
+	gsed -i 's/\.md/\.html/g' "${i%.*}".html >> "${i%.*}".html 
+done;
+
+mkdir ../temp_htmldocs
+cp -r * ../temp_htmldocs
+find ../temp_htmldocs -name "*.md" | xargs rm
+
+find . -name "*.html" | xargs rm
+
+mkdir htmldocs
+mv ../temp_htmldocs/* htmldocs
+rm -r ../temp_htmldocs
